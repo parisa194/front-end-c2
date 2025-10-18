@@ -1,0 +1,125 @@
+/* Styles for 3D flip card effect */
+.flip-card {
+    perspective: 1000px;
+    width: 100%;
+    max-width: 340px;
+    aspect-ratio: 5 / 6;
+    /* larger, more square */
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.7s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* class toggled on click/tap to support touch devices */
+.flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.flip-card-front {
+    transform: rotateY(0deg);
+}
+
+.flip-card-back {
+    transform: rotateY(180deg);
+    /* slightly different background so back is readable */
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Reuse existing user-card and user-image styles, but ensure sizing fits */
+.user-card {
+    border-radius: 16px;
+    min-height: 260px;
+    box-shadow: 0 8px 30px rgba(0, 10, 20, 0.6);
+    font-size: 1.08rem;
+}
+
+.user-image {
+    width: 38%;
+    max-width: 150px;
+    aspect-ratio: 1/1;
+    height: auto;
+    border-radius: 999px;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.06);
+}
+
+.user-name {
+    color: var(--metal-accent);
+    margin: 0.5rem 0 0 0;
+}
+
+/* Ensure back text is readable */
+.flip-card-back .phone,
+.flip-card-back .email,
+.flip-card-back .address,
+.flip-card-back .age,
+.flip-card-back .user-id {
+    color: rgba(255, 255, 255, 0.92);
+    margin: 0.25rem 0;
+    font-size: 0.92rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .flip-card {
+        max-width: 200px;
+    }
+    .user-card {
+        min-height: 180px;
+        font-size: 0.98rem;
+    }
+    .user-image {
+        width: 44%;
+        max-width: 90px;
+    }
+    .flip-card-inner {
+        transition: transform 0.5s;
+    }
+}
+
+/* Touch devices: use toggle class on tap (fallback); also avoid relying only on :hover */
+@media (hover: none) {
+    .flip-card:hover .flip-card-inner {
+        transform: none;
+    }
+
+    /* provide visual hint: slightly lift card on touch */
+    .flip-card:active .flip-card-inner {
+        transform: translateY(-4px);
+    }
+}
+
+.flip-card {
+    cursor: pointer;
+}
+
+.flip-card:focus {
+    outline: 3px solid rgba(155,209,255,0.18);
+    outline-offset: 4px;
+}

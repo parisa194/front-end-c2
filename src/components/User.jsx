@@ -1,25 +1,57 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
+import './User.css';
 
-export const User = ({ User = {} }) => {
+// Accept either `user` or legacy `User` prop for compatibility
+export const User = ({ user, User }) => {
+    const u = user || User || {};
+    const [flipped, setFlipped] = useState(false);
+
+    const toggle = (e) => {
+        e && e.preventDefault();
+        setFlipped((s) => !s);
+    };
+
+    const onKeyDown = (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            setFlipped((s) => !s);
+        }
+    };
+
     return (
-        <>
-            <div key ={User.id} className="user-card">
-                <img src={User.image} alt ={User.name} className="user-image" />
-                <h2 className="user-name">{User.name}</h2>
-                <h3 className="phone">{User.phone}</h3>
-                <p className="email">{User.email}</p>
-                <p className="address">{User.address}</p>
-                <p className="age">{User.age} years old</p>
-                <span className="user-id">ID: {User.id}</span>
+        <div
+            className={`flip-card${flipped ? ' flipped' : ''}`}
+            role="button"
+            tabIndex={0}
+            onClick={toggle}
+            onKeyDown={onKeyDown}
+            aria-pressed={flipped}
+        >
+            <div className="flip-card-inner">
+                <div className="flip-card-front user-card">
+                    <img src={u.image} alt={u.name} className="user-image" />
+                    <h2 className="user-name">{u.name}</h2>
+                </div>
+                <div className="flip-card-back user-card">
+                    <h2 className="user-name">{u.name}</h2>
+                    <p className="phone">{u.phone}</p>
+                    <p className="email">{u.email}</p>
+                    <p className="address">{u.address}</p>
+                    <p className="age">{u.age} years old</p>
+                    <span className="user-id">ID: {u.id}</span>
+                </div>
             </div>
-        </>
+        </div>
     );
 };
 
 User.propTypes = {
-    user: PropTypes.object.isRequired,
+    user: PropTypes.object,
+    User: PropTypes.object,
 };
 
 User.defaultProps = {
     user: {},
+    User: {},
 };
