@@ -1,16 +1,96 @@
-# React + Vite
+#  Gestor de Usuarios
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto es una aplicación web sencilla que permite ver y crear usuarios mediante la extraccion de informacion de una Api.  
+Está construida con **React (Vite)** en el frontend y **Express** en el backend.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+##  Funcionalidades
 
-## React Compiler
+- Muestra una lista de usuarios con su foto y datos personales.  
+- Permite crear nuevos usuarios mediante un formulario.  
+- Cada usuario tiene: nombre, teléfono, correo, dirección, edad y foto.  
+- Diseño tipo “tarjeta” con animación de volteo.  
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## ⚙️ Instalación y ejecución
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 1️⃣ Clonar el repositorio
+
+```bash
+git clone https://github.com/tuusuario/gestor-usuarios.git
+```
+
+### 2️⃣ Instalar dependencias
+
+#### Backend
+```bash
+cd backend
+npm install
+node index.js
+```
+> Servidor activo en: http://localhost:3000
+
+#### Frontend
+```bash
+cd ../frontend
+npm install
+npm run dev
+```
+> Aplicación en: http://localhost:5173
+
+---
+
+## Estructura del proyecto
+
+```
+src/
+├── App.jsx
+|── index.css
+|── Main.jsx
+├── components/
+│   ├── Form.jsx
+│   ├── User.jsx
+|   |── User.css
+│   └── Users.jsx
+└── App.css
+```
+
+---
+
+##  Endpoints del backend
+
+| Método | Ruta | Descripción |
+|--------|------|-------------|
+| GET | `/users` | Lista todos los usuarios |
+| POST | `/users` | Crea un nuevo usuario |
+
+Ejemplo de JSON para crear usuario:
+
+```json
+{
+  "name": "Jorge García",
+  "phone": "3101234567",
+  "email": "jorge@example.com",
+  "address": "Calle 45 #12-34, Bogotá",
+  "age": 28,
+  "photoUrl": "https://randomuser.me/api/portraits/men/75.jpg"
+}
+
+
+##  Tecnologías utilizadas
+
+- React + Vite  
+- Node.js + Express  
+- HTML / CSS / JavaScript
+
+
+
+##  Autor
+
+**Jorge Andres García Mojica 1088026128**
+**Paola Andrea Rios 1088322161**  
+Proyecto desarrollado con fines académicos y de práctica personal.  
+
+**NOTA: las imagenes utilizadas en esta app fueron obtenidas de internet con fines de estudio**
