@@ -30,7 +30,8 @@ export const User = ({ user, User }) => {
         >
             <div className="flip-card-inner">
                 <div className="flip-card-front user-card">
-                    <img src={u.image} alt={u.name} className="user-image" />
+                    <img src={u.photoUrl} alt={u.name} className="user-image" />
+                    
                     <h2 className="user-name">{u.name}</h2>
                 </div>
                 <div className="flip-card-back user-card">

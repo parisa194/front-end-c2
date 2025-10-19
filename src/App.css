@@ -1,42 +1,209 @@
-/* Users grid for displaying user cards */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-color: #0f172a;
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --text-color: #f1f5f9;
+  --accent-color: #61dafb;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1rem;
+}
+
+/* ===== CONTENEDOR PRINCIPAL ===== */
+#root {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 2rem;
+}
+
+/* ===== TITULO ===== */
+h1 {
+  text-align: center;
+  color: var(--accent-color);
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+/* ===== GRID DE USUARIOS ===== */
 .users-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
   justify-items: center;
+  margin-top: 2rem;
+  perspective: 1000px; /* Necesario para el efecto 3D */
+}
+
+/* ===== ESTRUCTURA DE LA TARJETA ===== */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  max-width: 280px;
+  height: 360px;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease;
+}
+
+.flip-card-inner:hover {
+  transform: rotateY(180deg);
+}
+
+/* ===== CARAS DE LA TARJETA ===== */
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+  backdrop-filter: blur(8px);
 }
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+
+/* ===== CARA FRONTAL ===== */
+.flip-card-front {
+  color: #fff;
+}
+
+.flip-card-front .user-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent-color);
+  margin-bottom: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.flip-card-front .user-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(97, 218, 251, 0.4);
+}
+
+.flip-card-front .user-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+/* ===== CARA POSTERIOR ===== */
+.flip-card-back {
+  transform: rotateY(180deg);
+  color: #f1f5f9;
+  padding: 20px;
   text-align: center;
 }
 
+.flip-card-back h2 {
+  color: var(--accent-color);
+  margin-bottom: 10px;
+}
+
+.flip-card-back p {
+  font-size: 0.9rem;
+  color: #cbd5e1;
+  margin: 4px 0;
+}
+
+.flip-card-back .user-id {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+}
+
+/* ===== FORMULARIO ===== */
+.form-container {
+  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 1.5rem;
+  border-radius: 12px;
+  max-width: 500px;
+  margin: 2rem auto;
+  text-align: left;
+  color: #f1f5f9;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.form-container label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  color: #94a3b8;
+}
+
+.form-container input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+  color: #f1f5f9;
+}
+
+.form-container input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  background: rgba(255,255,255,0.1);
+}
+
+.form-container button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--accent-color);
+  color: #0f172a;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.form-container button:hover {
+  background-color: #38bdf8;
+}
+
+/* ===== LOGO (SI EXISTE) ===== */
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
-  transition: filter 300ms;
-}
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  transition: filter 300ms ease;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em var(--accent-color));
 }
 
 @keyframes logo-spin {
@@ -54,18 +221,42 @@
   }
 }
 
-.card {
-  padding: 2em;
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  #root {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .flip-card-inner {
+    max-width: 220px;
+    height: 320px;
+  }
+
+  .flip-card-front .user-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .flip-card-front .user-name {
+    font-size: 1rem;
+  }
 }
 
-.read-the-docs {
-  color: #888;
-}
+@media (max-width: 480px) {
+  .form-container {
+    padding: 1rem;
+  }
 
-/* Translucent small container for the create-user form */
-.form-container {
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border: 1px solid rgba(255,255,255,0.06);
-  padding: 1rem;
-  border-radius: 10px;
+  .users-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .flip-card-inner {
+    max-width: 90%;
+    height: 300px;
+  }
 }

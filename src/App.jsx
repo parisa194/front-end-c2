@@ -24,7 +24,7 @@ function App() {
         email: e.target.email.value,
         address: e.target.address.value,
         age: e.target.age.value,
-        image: e.target.image.value,
+        photoUrl: e.target.image.value || "https://via.placeholder.com/150?text=Sin+Foto",
       }),
     });
     if (response.ok) {
